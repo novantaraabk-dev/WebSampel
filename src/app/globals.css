@@ -1,0 +1,1769 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 28% 98%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 168 80% 38%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 198 90% 42%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 24% 95%;
+    --muted-foreground: 215 16% 45%;
+
+    --accent: 68 69% 61%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 20% 90%;
+    --input: 214 20% 90%;
+    --ring: 68 69% 61%;
+
+    --radius: 1.4rem;
+
+    --sidebar-background: 222 47% 9%;
+    --sidebar-foreground: 210 20% 98%;
+    --sidebar-primary: 68 69% 61%;
+    --sidebar-primary-foreground: 222 47% 11%;
+    --sidebar-accent: 222 35% 15%;
+    --sidebar-accent-foreground: 210 20% 98%;
+    --sidebar-border: 222 30% 18%;
+    --sidebar-ring: 68 69% 61%;
+  }
+
+  .dark {
+    --background: 222 47% 7%;
+    --foreground: 210 20% 98%;
+
+    --card: 222 45% 10%;
+    --card-foreground: 210 20% 98%;
+
+    --popover: 222 45% 10%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 168 80% 42%;
+    --primary-foreground: 210 20% 98%;
+
+    --secondary: 198 90% 42%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 222 35% 15%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 168 76% 40%;
+    --accent-foreground: 210 20% 98%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 222 30% 18%;
+    --input: 222 30% 18%;
+    --ring: 168 80% 45%;
+
+    --sidebar-background: 222 47% 6%;
+    --sidebar-foreground: 210 20% 98%;
+    --sidebar-primary: 168 80% 42%;
+    --sidebar-primary-foreground: 210 20% 98%;
+    --sidebar-accent: 222 35% 12%;
+    --sidebar-accent-foreground: 210 20% 98%;
+    --sidebar-border: 222 30% 15%;
+    --sidebar-ring: 168 80% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased font-sans;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-condensed tracking-tight uppercase;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Fullpage Screen-by-Screen Transitions (Landing Page) */
+html.snap-active,
+html.snap-active body {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+@media (min-width: 1024px) {
+  .snap-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+}
+
+@media (max-width: 1023px) {
+  .snap-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+}
+
+::selection {
+  background: #0d9488;
+  color: #ffffff;
+}
+
+.teal-gradient {
+  background: linear-gradient(135deg, #0d9488 0%, #10b981 100%);
+}
+
+.navy-gradient {
+  background: linear-gradient(180deg, #081d27 0%, #0c2a38 50%, #081d27 100%);
+}
+
+.emerald-gradient {
+  background: linear-gradient(135deg, #0d9488 0%, #059669 100%);
+}
+
+.warm-gradient {
+  background: linear-gradient(135deg, #14b8a6 0%, #10b981 100%);
+}
+
+.soft-shadow {
+  box-shadow: 0 10px 30px -4px rgba(8, 29, 39, 0.06), 0 4px 8px -2px rgba(8, 29, 39, 0.03);
+}
+
+.glass-card {
+  @apply rounded-2xl border border-slate-200/80 bg-white/95 backdrop-blur-xl shadow-sm;
+}
+
+.glass-card-dark {
+  @apply rounded-2xl border border-white/10 bg-[#081d27]/90 backdrop-blur-xl text-white shadow-sm;
+}
+
+/* ========================================================
+   MODERN HIGH-END DESIGN SYSTEM TOKENS (Landing Page & System)
+   Canvas base: #F8FAFC (Ultra Clean Slate-White) / #060b11 (Dark Obsidian Navy)
+   ======================================================== */
+
+.neu-canvas {
+  background-color: #F8FAFC;
+}
+.dark .neu-canvas {
+  background-color: #060b11;
+}
+
+.neu-flat {
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(226, 232, 240, 0.85);
+}
+.dark .neu-flat {
+  background: #081d27;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.neu-convex {
+  background: #ffffff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+}
+.dark .neu-convex {
+  background: #081d27;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.neu-concave {
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+.dark .neu-concave {
+  background: #081d27;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.neu-inset {
+  background: #f1f5f9;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+.dark .neu-inset {
+  background: rgba(8, 29, 39, 0.6);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.neu-inset-deep {
+  background: #e2e8f0;
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(203, 213, 225, 0.8);
+}
+.dark .neu-inset-deep {
+  background: rgba(6, 21, 28, 0.8);
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.neu-inset:focus-within {
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.04),
+    0 0 0 2px rgba(13, 148, 136, 0.45);
+}
+
+.neu-btn {
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  color: #1e293b;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.neu-btn:hover {
+  transform: translateY(-2px);
+  background: #f0fdfa;
+  border-color: rgba(20, 184, 166, 0.4);
+  color: #0d9488;
+  box-shadow: 0 6px 16px rgba(13, 148, 136, 0.15);
+}
+
+.neu-btn:active {
+  transform: translateY(1px);
+  background: #f8fafc;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.dark .neu-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #f1f5f9;
+}
+.dark .neu-btn:hover {
+  background: rgba(20, 184, 166, 0.15);
+  border-color: rgba(20, 184, 166, 0.4);
+  color: #2dd4bf;
+}
+.dark .neu-btn:active {
+  background: rgba(8, 29, 39, 0.8);
+}
+
+.neu-btn-circle {
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.neu-btn-circle:hover {
+  transform: translateY(-2px) scale(1.05);
+  background: #f0fdfa;
+  border-color: rgba(20, 184, 166, 0.4);
+  color: #0d9488;
+  box-shadow: 0 6px 16px rgba(13, 148, 136, 0.15);
+}
+
+.neu-btn-circle:active {
+  transform: translateY(1px) scale(0.96);
+}
+
+.dark .neu-btn-circle {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #f1f5f9;
+}
+.dark .neu-btn-circle:hover {
+  background: rgba(20, 184, 166, 0.15);
+  border-color: rgba(20, 184, 166, 0.4);
+  color: #2dd4bf;
+}
+
+.neu-btn-primary {
+  background: linear-gradient(135deg, #0d9488, #059669);
+  box-shadow: 0 4px 14px rgba(13, 148, 136, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.neu-btn-primary:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #0f766e, #047857);
+  box-shadow: 0 6px 20px rgba(13, 148, 136, 0.45);
+}
+
+.neu-btn-primary:active {
+  transform: translateY(1px);
+}
+
+.neu-btn-dark {
+  background: linear-gradient(135deg, #081d27, #0d2c3a);
+  box-shadow: 0 4px 14px rgba(8, 29, 39, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.neu-btn-dark:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #0c2c3b, #123e52);
+  box-shadow: 0 6px 20px rgba(8, 29, 39, 0.45);
+}
+
+.neu-btn-dark:active {
+  transform: translateY(1px);
+}
+
+.neu-pill {
+  background: #f1f5f9;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+.dark .neu-pill {
+  background: rgba(8, 29, 39, 0.6);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.neu-pill-elevated {
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+.dark .neu-pill-elevated {
+  background: #081d27;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.neu-btn-gold {
+  background: linear-gradient(135deg, #14b8a6, #10b981);
+  box-shadow: 0 4px 16px rgba(20, 184, 166, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.neu-btn-gold:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #0d9488, #059669);
+  box-shadow: 0 6px 22px rgba(20, 184, 166, 0.45);
+}
+
+.neu-btn-gold:active {
+  transform: translateY(1px);
+}
+
+.neu-card-elevated {
+  background: #ffffff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.neu-card-elevated:hover {
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
+}
+
+.dark .neu-card-elevated {
+  background: rgba(8, 29, 39, 0.92);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+}
+
+.dark .neu-card-elevated:hover {
+  border-color: rgba(20, 184, 166, 0.35);
+}
+
+.neu-card-elevated-dark {
+  background: linear-gradient(145deg, #081d27, #06151c) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.neu-card-elevated-dark:hover {
+  border-color: rgba(20, 184, 166, 0.4) !important;
+}
+
+/* Guard: Prevent accidental cream background when neu-card-elevated is explicitly paired with dark classes (never match dark: variants) */
+.neu-card-elevated:not([class*="dark:"])[class*="bg-slate-900"],
+.neu-card-elevated:not([class*="dark:"])[class*="bg-black"] {
+  background: linear-gradient(145deg, #081d27, #06151c) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+/* Ensure all text inside explicitly dark cards always has high-contrast bright text */
+.neu-card-elevated-dark,
+.neu-card-elevated-dark * {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+.neu-card-elevated-dark .text-slate-950,
+.neu-card-elevated-dark .text-slate-900 {
+  color: #ffffff !important;
+}
+.neu-card-elevated-dark .text-slate-800,
+.neu-card-elevated-dark .text-slate-700 {
+  color: #e2e8f0 !important;
+}
+.neu-card-elevated-dark .text-slate-600,
+.neu-card-elevated-dark .text-slate-500 {
+  color: #94a3b8 !important;
+}
+.neu-card-elevated-dark .text-emerald-800,
+.neu-card-elevated-dark .text-emerald-900,
+.neu-card-elevated-dark .text-emerald-950 {
+  color: #6ee7b7 !important;
+}
+.neu-card-elevated-dark .text-blue-800,
+.neu-card-elevated-dark .text-blue-900,
+.neu-card-elevated-dark .text-blue-950 {
+  color: #93c5fd !important;
+}
+.neu-card-elevated-dark .text-amber-800,
+.neu-card-elevated-dark .text-amber-900,
+.neu-card-elevated-dark .text-amber-950 {
+  color: #fcd34d !important;
+}
+.neu-card-elevated-dark .neu-inset {
+  background: #0d141e !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #f1f5f9 !important;
+}
+
+/* Ensure dark mode neu-card-elevated text contrast */
+html.dark .neu-card-elevated,
+.dark .neu-card-elevated {
+  color: #f8fafc !important;
+}
+html.dark .neu-card-elevated .text-slate-950,
+html.dark .neu-card-elevated .text-slate-900,
+.dark .neu-card-elevated .text-slate-950,
+.dark .neu-card-elevated .text-slate-900 {
+  color: #f8fafc !important;
+}
+html.dark .neu-card-elevated .text-slate-800,
+html.dark .neu-card-elevated .text-slate-700,
+.dark .neu-card-elevated .text-slate-800,
+.dark .neu-card-elevated .text-slate-700 {
+  color: #cbd5e1 !important;
+}
+html.dark .neu-card-elevated .text-slate-600,
+html.dark .neu-card-elevated .text-slate-500,
+.dark .neu-card-elevated .text-slate-600,
+.dark .neu-card-elevated .text-slate-500 {
+  color: #94a3b8 !important;
+}
+html.dark .neu-card-elevated .text-emerald-800,
+html.dark .neu-card-elevated .text-emerald-900,
+html.dark .neu-card-elevated .text-emerald-950,
+.dark .neu-card-elevated .text-emerald-800,
+.dark .neu-card-elevated .text-emerald-900,
+.dark .neu-card-elevated .text-emerald-950 {
+  color: #6ee7b7 !important;
+}
+html.dark .neu-card-elevated .text-blue-800,
+html.dark .neu-card-elevated .text-blue-900,
+html.dark .neu-card-elevated .text-blue-950,
+.dark .neu-card-elevated .text-blue-800,
+.dark .neu-card-elevated .text-blue-900,
+.dark .neu-card-elevated .text-blue-950 {
+  color: #93c5fd !important;
+}
+html.dark .neu-card-elevated .text-amber-800,
+html.dark .neu-card-elevated .text-amber-900,
+html.dark .neu-card-elevated .text-amber-950,
+.dark .neu-card-elevated .text-amber-800,
+.dark .neu-card-elevated .text-amber-900,
+.dark .neu-card-elevated .text-amber-950 {
+  color: #fcd34d !important;
+}
+html.dark .neu-card-elevated .text-pink-700,
+html.dark .neu-card-elevated .text-pink-800,
+.dark .neu-card-elevated .text-pink-700,
+.dark .neu-card-elevated .text-pink-800 {
+  color: #f472b6 !important;
+}
+html.dark .neu-card-elevated .neu-inset,
+.dark .neu-card-elevated .neu-inset {
+  background: #0d141e !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #f1f5f9 !important;
+}
+html.dark .neu-card-elevated .neu-inset *,
+.dark .neu-card-elevated .neu-inset * {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+
+
+.neu-dashboard-card {
+  background: #ffffff;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.neu-dashboard-card-dark {
+  background: linear-gradient(145deg, #111a26, #090e15);
+  box-shadow: 
+    8px 8px 22px rgba(0, 0, 0, 0.55),
+    -4px -4px 14px rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.neu-nav-item-active {
+  background: linear-gradient(135deg, #00a884 0%, #059669 100%) !important;
+  color: #ffffff !important;
+  box-shadow: inset 1px 1px 3px rgba(255, 255, 255, 0.4), 0 4px 12px rgba(0, 168, 132, 0.35) !important;
+}
+
+/* ========================================================
+   DARK / NIGHT MODE NEUMORPHIC OVERRIDES
+   ======================================================== */
+.dark .neu-canvas {
+  background-color: #070b10 !important;
+}
+
+.dark .neu-flat {
+  background: #0d141e !important;
+  box-shadow: 
+    6px 6px 16px rgba(0, 0, 0, 0.65),
+    -4px -4px 12px rgba(255, 255, 255, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: #f1f5f9 !important;
+}
+
+.dark .neu-convex {
+  background: linear-gradient(145deg, #131d2a, #0b1118) !important;
+  box-shadow: 
+    8px 8px 18px rgba(0, 0, 0, 0.65),
+    -5px -5px 14px rgba(255, 255, 255, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: #f1f5f9 !important;
+}
+
+.dark .neu-concave {
+  background: linear-gradient(145deg, #0b1118, #131d2a) !important;
+  box-shadow: 
+    inset 4px 4px 8px rgba(0, 0, 0, 0.7),
+    inset -3px -3px 6px rgba(255, 255, 255, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+  color: #f1f5f9 !important;
+}
+
+.dark .neu-inset {
+  background: #070b10 !important;
+  box-shadow: 
+    inset 4px 4px 10px rgba(0, 0, 0, 0.8),
+    inset -3px -3px 8px rgba(255, 255, 255, 0.03) !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+  color: #f1f5f9 !important;
+}
+
+.dark .neu-pill {
+  background: #0d141e !important;
+  box-shadow: 
+    inset 2px 2px 5px rgba(0, 0, 0, 0.6),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: #f1f5f9 !important;
+}
+
+.dark .neu-pill-elevated {
+  background: linear-gradient(145deg, #16202c, #0d141e) !important;
+  box-shadow: 
+    4px 4px 10px rgba(0, 0, 0, 0.5),
+    -3px -3px 8px rgba(255, 255, 255, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: #f1f5f9 !important;
+}
+
+.dark .neu-card-elevated {
+  background: linear-gradient(145deg, #131c27, #0a0f16) !important;
+  box-shadow: 
+    10px 10px 26px rgba(0, 0, 0, 0.7),
+    -6px -6px 18px rgba(255, 255, 255, 0.03) !important;
+  border-color: rgba(255, 255, 255, 0.09) !important;
+  color: #f1f5f9 !important;
+}
+
+.dark .neu-btn {
+  background: linear-gradient(145deg, #1e2633, #111722) !important;
+  box-shadow: 
+    5px 5px 12px rgba(0, 0, 0, 0.6),
+    -3px -3px 8px rgba(255, 255, 255, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #f1f5f9 !important;
+}
+
+.dark .neu-btn:hover {
+  background: linear-gradient(145deg, #273142, #161e2c) !important;
+  box-shadow: 
+    7px 7px 16px rgba(0, 0, 0, 0.7),
+    -4px -4px 10px rgba(255, 255, 255, 0.07) !important;
+  color: #ffffff !important;
+}
+
+.dark .neu-btn-circle {
+  background: linear-gradient(145deg, #1e2633, #111722) !important;
+  box-shadow: 
+    5px 5px 12px rgba(0, 0, 0, 0.6),
+    -3px -3px 8px rgba(255, 255, 255, 0.04) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #cbd5e1 !important;
+}
+
+.dark .glass-card {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  background-color: rgba(13, 20, 30, 0.88) !important;
+  color: #f1f5f9 !important;
+}
+
+
+/* ========================================================
+   GLOBAL NEU-CANVAS ADAPTATION (Admin & Manajemen)
+   ======================================================== */
+.neu-canvas .bg-white {
+  background-color: #ffffff !important;
+}
+.neu-canvas .bg-stone-50,
+.neu-canvas .bg-slate-50 {
+  background-color: rgba(255, 255, 255, 0.45) !important;
+}
+.neu-canvas .border-stone-200,
+.neu-canvas .border-slate-200 {
+  border-color: rgba(255, 255, 255, 0.75) !important;
+}
+
+/* Inset inputs, textareas, selects inside neu-canvas */
+.neu-canvas input:not([type="file"]):not([type="checkbox"]):not([type="radio"]),
+.neu-canvas textarea,
+.neu-canvas select {
+  background-color: #f8fafc !important;
+  box-shadow: 
+    inset 3px 3px 6px rgba(165, 155, 140, 0.4),
+    inset -3px -3px 6px rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.7) !important;
+  border-radius: 0.875rem !important;
+  color: #0f172a !important;
+  transition: all 0.2s ease !important;
+}
+
+.neu-canvas input:not([type="file"]):not([type="checkbox"]):not([type="radio"]):focus,
+.neu-canvas textarea:focus,
+.neu-canvas select:focus {
+  box-shadow: 
+    inset 3px 3px 6px rgba(165, 155, 140, 0.55),
+    inset -3px -3px 6px rgba(255, 255, 255, 1),
+    0 0 0 2px rgba(5, 150, 105, 0.35) !important;
+  border-color: rgba(5, 150, 105, 0.45) !important;
+  outline: none !important;
+}
+
+/* ========================================================
+   NEUMORPHIC FORM DESIGN SYSTEM & MOBILE REFINEMENT
+   ======================================================== */
+html:not(.dark) .neu-form-container {
+  color: #1e293b;
+}
+
+/* Inset inputs, textareas, selects (Light Mode) */
+html:not(.dark) .neu-form-container input:not([type="file"]):not([type="checkbox"]):not([type="radio"]),
+html:not(.dark) .neu-form-container textarea,
+html:not(.dark) .neu-form-container select {
+  background-color: #f8fafc !important;
+  box-shadow: 
+    inset 3px 3px 6px rgba(165, 155, 140, 0.45),
+    inset -3px -3px 6px rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.65) !important;
+  color: #0f172a !important;
+  border-radius: 1rem !important;
+  padding-left: 0.875rem !important;
+  padding-right: 0.875rem !important;
+  font-size: 0.875rem !important;
+  transition: all 0.2s ease !important;
+}
+
+html:not(.dark) .neu-form-container input:not([type="file"]):not([type="checkbox"]):not([type="radio"]):focus,
+html:not(.dark) .neu-form-container textarea:focus,
+html:not(.dark) .neu-form-container select:focus {
+  box-shadow: 
+    inset 3px 3px 6px rgba(165, 155, 140, 0.55),
+    inset -3px -3px 6px rgba(255, 255, 255, 1),
+    0 0 0 2px rgba(5, 150, 105, 0.35) !important;
+  border-color: rgba(5, 150, 105, 0.45) !important;
+  outline: none !important;
+}
+
+html:not(.dark) .neu-form-container input::placeholder,
+html:not(.dark) .neu-form-container textarea::placeholder {
+  color: #94a3b8 !important;
+  font-size: 0.8125rem !important;
+}
+
+/* Labels (Light Mode) */
+html:not(.dark) .neu-form-container label {
+  color: #1e293b !important;
+  font-size: 0.725rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  margin-bottom: 0.25rem !important;
+  display: inline-block !important;
+}
+
+@media (min-width: 640px) {
+  html:not(.dark) .neu-form-container label {
+    font-size: 0.775rem !important;
+  }
+}
+
+/* Form descriptions / helper text (Light Mode) */
+html:not(.dark) .neu-form-container .text-muted-foreground,
+html:not(.dark) .neu-form-container [data-description] {
+  color: #64748b !important;
+  font-size: 0.7rem !important;
+  line-height: 1.35 !important;
+}
+
+/* Submit button in form (Light Mode) */
+html:not(.dark) .neu-form-container button[type="submit"] {
+  background: linear-gradient(145deg, #1e293b, #090e15) !important;
+  color: #f1f5f9 !important;
+  box-shadow: 
+    8px 8px 18px rgba(165, 155, 140, 0.45),
+    -8px -8px 18px rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 1.15rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+html:not(.dark) .neu-form-container button[type="submit"]:hover {
+  background: linear-gradient(145deg, #28374d, #0f1621) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 
+    10px 10px 24px rgba(165, 155, 140, 0.55),
+    -10px -10px 24px rgba(255, 255, 255, 1) !important;
+}
+
+html:not(.dark) .neu-form-container button[type="submit"]:active {
+  transform: translateY(1px) !important;
+  box-shadow: 
+    inset 4px 4px 8px rgba(0, 0, 0, 0.8),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Mobile specific refinement */
+@media (max-width: 639px) {
+  .neu-form-container form {
+    gap: 1.25rem !important;
+  }
+}
+
+/* ========================================================
+   DARK / NIGHT MODE NEUMORPHIC FORM DESIGN OVERRIDES
+   ======================================================== */
+html.dark .neu-form-container,
+.dark .neu-form-container {
+  color: #f1f5f9;
+}
+
+/* Card Section Form */
+html.dark .neu-form-container .bg-white,
+.dark .neu-form-container .bg-white,
+html.dark .neu-form-container [class*="bg-white"],
+.dark .neu-form-container [class*="bg-white"],
+html.dark .neu-form-container div[class*="rounded-"][class*="border"],
+.dark .neu-form-container div[class*="rounded-"][class*="border"] {
+  background-color: #0d141e !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: #f1f5f9 !important;
+}
+
+/* Garis pembatas section */
+html.dark .neu-form-container .border-b,
+.dark .neu-form-container .border-b,
+html.dark .neu-form-container div[class*="border-b"],
+.dark .neu-form-container div[class*="border-b"] {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Judul Section Form */
+html.dark .neu-form-container h2,
+.dark .neu-form-container h2,
+html.dark .neu-form-container h3,
+.dark .neu-form-container h3,
+html.dark .neu-form-container h4,
+.dark .neu-form-container h4 {
+  color: #ffffff !important;
+}
+
+/* Icon dalam section */
+html.dark .neu-form-container svg.text-primary,
+.dark .neu-form-container svg.text-primary,
+html.dark .neu-form-container .text-primary svg,
+.dark .neu-form-container .text-primary svg,
+html.dark .neu-form-container [class*="text-primary"] svg,
+.dark .neu-form-container [class*="text-primary"] svg {
+  color: #2dd4bf !important;
+}
+
+/* SEMUA Label Form */
+html.dark .neu-form-container label,
+.dark .neu-form-container label,
+html.dark .neu-form-container [data-slot="label"],
+.dark .neu-form-container [data-slot="label"],
+html.dark .neu-form-container .form-label,
+.dark .neu-form-container .form-label {
+  color: #ffffff !important;
+  font-weight: 800 !important;
+}
+
+/* Label Aksen / Prioritas (misal: NIK, Keperluan) */
+html.dark .neu-form-container label[class*="text-primary"],
+.dark .neu-form-container label[class*="text-primary"],
+html.dark .neu-form-container label.text-primary,
+.dark .neu-form-container label.text-primary,
+html.dark .neu-form-container .text-primary > label,
+.dark .neu-form-container .text-primary > label {
+  color: #2dd4bf !important;
+}
+
+/* Label dengan varian teks slate/stone */
+html.dark .neu-form-container label[class*="text-slate-"],
+.dark .neu-form-container label[class*="text-slate-"],
+html.dark .neu-form-container label[class*="text-stone-"],
+.dark .neu-form-container label[class*="text-stone-"] {
+  color: #e2e8f0 !important;
+}
+
+/* Input, Textarea, dan Select */
+html.dark .neu-form-container input:not([type="file"]):not([type="checkbox"]):not([type="radio"]),
+.dark .neu-form-container input:not([type="file"]):not([type="checkbox"]):not([type="radio"]),
+html.dark .neu-form-container textarea,
+.dark .neu-form-container textarea,
+html.dark .neu-form-container select,
+.dark .neu-form-container select {
+  background-color: #080d14 !important;
+  box-shadow: 
+    inset 3px 3px 8px rgba(0, 0, 0, 0.85),
+    inset -2px -2px 6px rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+}
+
+/* Input Focus */
+html.dark .neu-form-container input:not([type="file"]):not([type="checkbox"]):not([type="radio"]):focus,
+.dark .neu-form-container input:not([type="file"]):not([type="checkbox"]):not([type="radio"]):focus,
+html.dark .neu-form-container textarea:focus,
+.dark .neu-form-container textarea:focus,
+html.dark .neu-form-container select:focus,
+.dark .neu-form-container select:focus {
+  box-shadow: 
+    inset 3px 3px 8px rgba(0, 0, 0, 0.85),
+    0 0 0 2px rgba(0, 168, 132, 0.45) !important;
+  border-color: #2dd4bf !important;
+  outline: none !important;
+}
+
+/* Placeholder */
+html.dark .neu-form-container input::placeholder,
+.dark .neu-form-container input::placeholder,
+html.dark .neu-form-container textarea::placeholder,
+.dark .neu-form-container textarea::placeholder {
+  color: #64748b !important;
+}
+
+/* Disabled Input */
+html.dark .neu-form-container input:disabled,
+.dark .neu-form-container input:disabled,
+html.dark .neu-form-container textarea:disabled,
+.dark .neu-form-container textarea:disabled,
+html.dark .neu-form-container select:disabled,
+.dark .neu-form-container select:disabled {
+  background-color: #05080c !important;
+  color: #94a3b8 !important;
+  opacity: 0.75 !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Helper / Description Text */
+html.dark .neu-form-container .text-muted-foreground,
+.dark .neu-form-container .text-muted-foreground,
+html.dark .neu-form-container [data-description],
+.dark .neu-form-container [data-description],
+html.dark .neu-form-container p[class*="text-muted"],
+.dark .neu-form-container p[class*="text-muted"] {
+  color: #94a3b8 !important;
+}
+
+/* Area Unggah Berkas (Uploader) */
+html.dark .neu-form-container [class*="border-dashed"],
+.dark .neu-form-container [class*="border-dashed"] {
+  background-color: rgba(255, 255, 255, 0.02) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+html.dark .neu-form-container [class*="border-dashed"]:hover,
+.dark .neu-form-container [class*="border-dashed"]:hover {
+  border-color: rgba(0, 168, 132, 0.45) !important;
+}
+
+html.dark .neu-form-container [class*="border-dashed"] .bg-white,
+.dark .neu-form-container [class*="border-dashed"] .bg-white {
+  background-color: #080d14 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+html.dark .neu-form-container [class*="border-dashed"] svg,
+.dark .neu-form-container [class*="border-dashed"] svg {
+  color: #2dd4bf !important;
+}
+
+html.dark .neu-form-container [class*="border-dashed"] p,
+.dark .neu-form-container [class*="border-dashed"] p {
+  color: #cbd5e1 !important;
+}
+
+/* Tombol Submit */
+html.dark .neu-form-container button[type="submit"],
+.dark .neu-form-container button[type="submit"] {
+  background: linear-gradient(145deg, #0d3830, #061d19) !important;
+  color: #2dd4bf !important;
+  border: 1px solid rgba(0, 168, 132, 0.35) !important;
+  box-shadow: 
+    6px 6px 18px rgba(0, 0, 0, 0.7),
+    -4px -4px 12px rgba(255, 255, 255, 0.02) !important;
+}
+
+html.dark .neu-form-container button[type="submit"]:hover,
+.dark .neu-form-container button[type="submit"]:hover {
+  background: linear-gradient(145deg, #134e42, #082823) !important;
+  border-color: #2dd4bf !important;
+  color: #ffffff !important;
+  box-shadow: 
+    8px 8px 22px rgba(0, 0, 0, 0.8),
+    0 0 16px rgba(0, 168, 132, 0.25) !important;
+}
+
+/* Mobile Navigation Sheet Close Button */
+[data-radix-portal] button:has(svg.lucide-x) {
+  background: #f8fafc !important;
+  box-shadow: 
+    3px 3px 8px rgba(165, 155, 140, 0.45),
+    -3px -3px 8px rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+  color: #1e293b !important;
+  border-radius: 9999px !important;
+  width: 2.25rem !important;
+  height: 2.25rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  top: 1rem !important;
+  right: 1rem !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  opacity: 1 !important;
+}
+
+[data-radix-portal] button:has(svg.lucide-x):hover {
+  transform: scale(1.08) !important;
+  background: #f7f3ec !important;
+  box-shadow: 
+    5px 5px 12px rgba(165, 155, 140, 0.52),
+    -5px -5px 12px rgba(255, 255, 255, 1) !important;
+}
+
+[data-radix-portal] button:has(svg.lucide-x):active {
+  transform: scale(0.95) !important;
+  box-shadow: 
+    inset 2px 2px 4px rgba(165, 155, 140, 0.55),
+    inset -2px -2px 4px rgba(255, 255, 255, 0.95) !important;
+}
+
+
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-slow {
+  display: flex;
+  width: max-content;
+  animation: marquee 45s linear infinite;
+}
+
+.animate-marquee-slow:hover {
+  animation-play-state: paused;
+}
+
+.marquee-gradient-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+
+@supports (scrollbar-width: none) {
+  .no-scrollbar {
+    scrollbar-width: none;  /* Firefox */
+  }
+}
+
+/* Custom Thin Line Scrollbar (Ganti box scrollbar default menjadi garis tipis elegan) */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Scrollbar untuk area terang / halaman utama */
+main::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+}
+
+main::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.6);
+}
+
+/* Support Firefox / modern standard thin scrollbar */
+@supports (scrollbar-width: thin) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════
+   Hero Section — Premium Micro-Animations
+   Seamless 8–10s loop, natural motion, no layout shift
+   ═══════════════════════════════════════════════════ */
+
+/* Camera push-in: very slow 2–3% zoom (infinite alternate) */
+.hero-camera-push {
+  animation: heroZoomIn 10s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes heroZoomIn {
+  from { transform: scale(1); }
+  to   { transform: scale(1.03); }
+}
+
+/* Cloud drift (two speed variants) */
+.hero-cloud-drift {
+  animation: heroCloudDrift 22s ease-in-out infinite;
+  will-change: transform;
+}
+.hero-cloud-drift-reverse {
+  animation: heroCloudDrift 30s ease-in-out infinite reverse;
+  will-change: transform;
+}
+@keyframes heroCloudDrift {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(35px); }
+}
+
+/* Floating cards — 3 variants with staggered timing */
+.hero-float-a {
+  animation: heroFloatA 4.2s ease-in-out infinite;
+  will-change: transform;
+}
+.hero-float-b {
+  animation: heroFloatB 5s ease-in-out infinite;
+  will-change: transform;
+}
+.hero-float-c {
+  animation: heroFloatC 3.6s ease-in-out infinite;
+  will-change: transform;
+}
+.hero-float-d {
+  animation: heroFloatD 4.6s ease-in-out infinite;
+  will-change: transform;
+}
+@keyframes heroFloatA {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+@keyframes heroFloatB {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-7px); }
+}
+@keyframes heroFloatC {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-13px); }
+}
+@keyframes heroFloatD {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+/* Button light-sweep */
+.hero-btn-sweep {
+  position: relative;
+  overflow: hidden;
+}
+.hero-btn-sweep::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.22) 50%,
+    transparent 65%
+  );
+  transform: translateX(-100%);
+  animation: heroSweep 8s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes heroSweep {
+  0%, 70% { transform: translateX(-100%); }
+  100%    { transform: translateX(250%); }
+}
+
+/* ── Hero Mascot Character — smooth natural breathing & floating animation ── */
+.hero-mascot-anim {
+  animation: heroMascotFloat 6.5s ease-in-out infinite;
+  will-change: transform, filter;
+  transform-origin: bottom center;
+}
+
+@keyframes heroMascotFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    filter: drop-shadow(0 20px 35px rgba(0, 0, 0, 0.18));
+  }
+  35% {
+    transform: translateY(-9px) rotate(0.45deg) scale(1.008);
+    filter: drop-shadow(0 30px 48px rgba(0, 0, 0, 0.22));
+  }
+  70% {
+    transform: translateY(-4px) rotate(-0.35deg) scale(1.004);
+    filter: drop-shadow(0 24px 38px rgba(0, 0, 0, 0.19));
+  }
+}
+
+/* Tablet screen gentle glow pulse (Warm Amber) */
+.hero-tablet-shine {
+  position: absolute;
+  top: 36%;
+  left: 54%;
+  width: 130px;
+  height: 85px;
+  border-radius: 16px;
+  background: radial-gradient(circle, rgba(229, 161, 37, 0.4) 0%, rgba(194, 94, 52, 0.15) 45%, transparent 70%);
+  filter: blur(12px);
+  pointer-events: none;
+  animation: tabletScreenPulse 3.5s ease-in-out infinite;
+}
+
+@keyframes tabletScreenPulse {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.08);
+  }
+}
+
+/* ========================================================
+   HIDE SCROLLBAR UTILITIES (Keep scrolling functional)
+   ======================================================== */
+.no-scrollbar::-webkit-scrollbar,
+.scrollbar-none::-webkit-scrollbar,
+[data-sidebar="content"]::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.no-scrollbar,
+.scrollbar-none,
+[data-sidebar="content"] {
+  -ms-overflow-style: none !important; /* IE and Edge */
+}
+
+@supports (scrollbar-width: none) {
+  .no-scrollbar,
+  .scrollbar-none,
+  [data-sidebar="content"] {
+    scrollbar-width: none !important;
+  }
+}
+
+/* ========================================================
+   GLOBAL NIGHT MODE / DARK THEME SYSTEM OVERRIDES
+   ======================================================== */
+.dark,
+.dark body {
+  background-color: #070b10 !important;
+  color: #f1f5f9 !important;
+}
+
+/* Background canvas / beige override across all sections */
+.dark section,
+.dark main,
+.dark .neu-canvas {
+  background-color: #070b10 !important;
+}
+
+/* Headings in Dark Mode */
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6 {
+  color: #ffffff !important;
+}
+
+/* Dark text turned crisp light in Dark Mode */
+.dark .text-slate-950,
+.dark .text-slate-900,
+.dark .text-slate-800,
+.dark .text-stone-900,
+.dark .text-stone-800 {
+  color: #f8fafc !important;
+}
+
+.dark .text-slate-700,
+.dark .text-slate-600,
+.dark .text-stone-700,
+.dark .text-stone-600 {
+  color: #cbd5e1 !important;
+}
+
+.dark .text-slate-500,
+.dark .text-slate-400,
+.dark .text-stone-500,
+.dark .text-stone-400 {
+  color: #94a3b8 !important;
+}
+
+/* Dark emerald & green accents adapted for dark mode */
+.dark .text-emerald-950,
+.dark .text-emerald-900,
+.dark .text-emerald-800,
+.dark .text-emerald-700 {
+  color: #a7f3d0 !important;
+}
+
+/* Green olive accents turned lime neon in dark mode */
+.dark [class*="text-teal-600"],
+.dark [class*="text-teal-700"],
+.dark [class*="text-teal-800"] {
+  color: #2dd4bf !important;
+}
+
+.dark [class*="border-teal-600"],
+.dark [class*="border-teal-700"] {
+  border-color: #2dd4bf !important;
+}
+
+/* Yellow / Amber Callouts in Dark Mode */
+.dark [class*="bg-amber-50"],
+.dark [class*="bg-yellow-50"] {
+  background-color: rgba(245, 158, 11, 0.12) !important;
+  border-color: rgba(245, 158, 11, 0.25) !important;
+}
+
+.dark [class*="text-amber-900"],
+.dark [class*="text-amber-800"] {
+  color: #fde68a !important;
+}
+
+/* Lime Highlight Pills & Quotes in Dark Mode */
+.dark [class*="bg-teal-500/15"],
+.dark [class*="bg-teal-500/20"],
+.dark [class*="bg-teal-500/10"] {
+  background-color: rgba(0, 168, 132, 0.12) !important;
+}
+
+/* Prose Rich Text in Dark Mode */
+.dark .prose {
+  color: #cbd5e1 !important;
+}
+.dark .prose p,
+.dark .prose li,
+.dark .prose span {
+  color: #cbd5e1 !important;
+}
+.dark .prose strong,
+.dark .prose b,
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3,
+.dark .prose h4 {
+  color: #ffffff !important;
+}
+
+/* Borders in Dark Mode */
+.dark [class*="border-stone-300"],
+.dark [class*="border-stone-200"],
+.dark [class*="border-slate-300"],
+.dark [class*="border-slate-200"],
+.dark [class*="border-slate-100"] {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Convert solid white & light cards to sleek dark slate in Dark Mode */
+.dark .bg-white {
+  background-color: #0d141e !important;
+  background-image: none !important;
+}
+
+.dark .bg-stone-50,
+.dark .bg-slate-50 {
+  background-color: #080d14 !important;
+  background-image: none !important;
+}
+
+.dark [class*="bg-stone-50/"],
+.dark [class*="bg-slate-50/"] {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+/* Recessed Image Wells & Backgrounds */
+.dark .bg-slate-200,
+.dark .bg-slate-100,
+.dark .bg-stone-200,
+.dark .bg-stone-100 {
+  background-color: #111827 !important;
+}
+
+/* Neumorphic Cards & Components in Dark Mode */
+.dark .neu-inset {
+  background: #05080c !important;
+  box-shadow: 
+    inset 4px 4px 10px rgba(0, 0, 0, 0.85),
+    inset -3px -3px 8px rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+.dark .neu-flat {
+  background: #0d141e !important;
+  box-shadow: 
+    6px 6px 16px rgba(0, 0, 0, 0.7),
+    -4px -4px 12px rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #f1f5f9 !important;
+}
+
+.dark .neu-convex {
+  background: linear-gradient(145deg, #131d2a, #0b1118) !important;
+  box-shadow: 
+    8px 8px 18px rgba(0, 0, 0, 0.7),
+    -5px -5px 14px rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #f1f5f9 !important;
+}
+
+.dark .neu-card-elevated {
+  background: linear-gradient(145deg, #131c27, #0a0f16) !important;
+  box-shadow: 
+    10px 10px 26px rgba(0, 0, 0, 0.75),
+    -6px -6px 18px rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.09) !important;
+  color: #f1f5f9 !important;
+}
+
+.dark .neu-pill {
+  background: #0d141e !important;
+  box-shadow: 
+    inset 2px 2px 5px rgba(0, 0, 0, 0.6),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #2dd4bf !important;
+}
+
+.dark .neu-btn {
+  background: linear-gradient(145deg, #1e2633, #111722) !important;
+  box-shadow: 
+    5px 5px 12px rgba(0, 0, 0, 0.6),
+    -3px -3px 8px rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #f1f5f9 !important;
+}
+
+.dark .neu-btn:hover {
+  background: linear-gradient(145deg, #273142, #161e2c) !important;
+  box-shadow: 
+    7px 7px 16px rgba(0, 0, 0, 0.7),
+    -4px -4px 10px rgba(255, 255, 255, 0.07) !important;
+  color: #ffffff !important;
+}
+
+.dark .glass-card {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  background-color: rgba(13, 20, 30, 0.88) !important;
+  color: #f1f5f9 !important;
+}
+
+/* Smooth transition when toggling */
+html,
+body,
+section {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* ========================================================
+   PANEL MANAJEMEN & ADMIN DARK MODE SYSTEM OVERRIDES
+   ======================================================== */
+
+/* 1. Main Canvas & Background Kanvas Panel */
+.dark .neu-canvas,
+.dark [class*="bg-slate-100"],
+.dark .bg-slate-100 {
+  background-color: #070b10 !important;
+  background-image: none !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* 2. Kartu Dashboard Manajemen & Admin (neu-dashboard-card) */
+.dark .neu-dashboard-card,
+html.dark .neu-dashboard-card {
+  background: linear-gradient(145deg, #0e1520, #080d14) !important;
+  box-shadow: 
+    8px 8px 22px rgba(0, 0, 0, 0.75),
+    -4px -4px 14px rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #f1f5f9 !important;
+}
+
+.dark .neu-dashboard-card:hover,
+html.dark .neu-dashboard-card:hover {
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+/* Bayangan Neumorphic Terang di-override ke bayangan gelap lembut */
+.dark [class*="shadow-sm"] {
+  box-shadow: 
+    5px 5px 15px rgba(0, 0, 0, 0.7),
+    -3px -3px 10px rgba(255, 255, 255, 0.02) !important;
+}
+
+/* 3. Card Elements & Headers */
+.dark [data-slot="card"],
+.dark .card,
+.dark [class*="rounded-3xl"][class*="border"],
+.dark [class*="rounded-\[2.5rem\]"][class*="border"],
+.dark [class*="rounded-\[24px\]"][class*="border"],
+.dark [class*="rounded-\[22px\]"][class*="border"] {
+  background-color: #0d141e !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: #f1f5f9 !important;
+}
+
+.dark [data-slot="card-header"],
+.dark [data-slot="card-footer"] {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark [data-slot="card-title"] {
+  color: #ffffff !important;
+}
+
+.dark [data-slot="card-description"] {
+  color: #94a3b8 !important;
+}
+
+/* 4. Tabs Navigasi Manajemen / Admin */
+.dark [role="tablist"],
+.dark [data-slot="tabs-list"],
+.dark .tabs-list {
+  background-color: #0b1118 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.8) !important;
+}
+
+.dark [role="tab"],
+.dark [data-slot="tabs-trigger"],
+.dark .tabs-trigger {
+  color: #94a3b8 !important;
+}
+
+.dark [role="tab"]:hover,
+.dark [data-slot="tabs-trigger"]:hover {
+  color: #ffffff !important;
+}
+
+.dark [role="tab"][data-state="active"],
+.dark [data-slot="tabs-trigger"][data-state="active"],
+.dark [data-state="active"][class*="data-[state=active]:bg-teal-600"] {
+  background-color: #121c28 !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 
+    4px 4px 12px rgba(0, 0, 0, 0.65),
+    -2px -2px 8px rgba(255, 255, 255, 0.04) !important;
+}
+
+/* 5. Tabel Data Manajemen & Admin */
+.dark table {
+  color: #cbd5e1 !important;
+}
+
+.dark thead,
+.dark thead tr,
+.dark th,
+.dark [data-slot="table-head"] {
+  background-color: #0b1118 !important;
+  color: #94a3b8 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark tbody tr,
+.dark [data-slot="table-row"] {
+  border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+.dark tbody tr:hover,
+.dark [data-slot="table-row"]:hover {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+.dark td,
+.dark [data-slot="table-cell"] {
+  color: #e2e8f0 !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+.dark td .text-slate-900,
+.dark td .text-slate-800,
+.dark td .text-slate-700 {
+  color: #ffffff !important;
+}
+
+.dark td .text-slate-600,
+.dark td .text-slate-500 {
+  color: #94a3b8 !important;
+}
+
+/* 6. Form Inputs & Selects di Seluruh Panel */
+.dark input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+.dark textarea,
+.dark select,
+.dark [data-slot="input"],
+.dark [data-slot="textarea"],
+.dark [data-slot="select-trigger"] {
+  background-color: #080d14 !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.8) !important;
+}
+
+.dark input:focus,
+.dark textarea:focus,
+.dark select:focus,
+.dark [data-slot="input"]:focus,
+.dark [data-slot="select-trigger"]:focus {
+  border-color: #2dd4bf !important;
+  box-shadow: 
+    inset 2px 2px 6px rgba(0, 0, 0, 0.8),
+    0 0 0 2px rgba(0, 168, 132, 0.35) !important;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #64748b !important;
+}
+
+.dark label,
+.dark [data-slot="label"] {
+  color: #f1f5f9 !important;
+}
+
+/* 7. Dialog, Modal, & Alert Dialog */
+.dark [role="dialog"],
+.dark [data-slot="dialog-content"],
+.dark [data-slot="alert-dialog-content"] {
+  background-color: #0d141e !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #f1f5f9 !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9) !important;
+}
+
+.dark [data-slot="dialog-title"],
+.dark [data-slot="alert-dialog-title"] {
+  color: #ffffff !important;
+}
+
+.dark [data-slot="dialog-description"],
+.dark [data-slot="alert-dialog-description"] {
+  color: #94a3b8 !important;
+}
+
+/* 8. Dropdown Menu, Popovers, & Select Options */
+.dark [data-slot="dropdown-menu-content"],
+.dark [data-slot="popover-content"],
+.dark [data-slot="select-content"] {
+  background-color: #0d141e !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #f1f5f9 !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.85) !important;
+}
+
+.dark [data-slot="dropdown-menu-item"]:hover,
+.dark [data-slot="select-item"]:hover,
+.dark [data-slot="dropdown-menu-item"]:focus,
+.dark [data-slot="select-item"]:focus {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+}
+
+.dark [data-slot="dropdown-menu-separator"] {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* 9. Tombol Aksi Panel & Kartu Neumorphic (Manajemen & Absensi) */
+.dark button[class*="slate-100"],
+.dark a[class*="slate-100"],
+.dark div[class*="slate-100"] {
+  background: #0d141e !important;
+  color: #f1f5f9 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 
+    4px 4px 12px rgba(0, 0, 0, 0.6),
+    -2px -2px 8px rgba(255, 255, 255, 0.03) !important;
+}
+
+.dark button[class*="slate-100"]:hover,
+.dark a[class*="slate-100"]:hover {
+  background: linear-gradient(145deg, #1e2a3b, #101822) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.dark div[class*="shadow-sm"],
+.dark input[class*="shadow-sm"] {
+  background: #070b10 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+  box-shadow: 
+    inset 2px 2px 6px rgba(0, 0, 0, 0.8),
+    inset -2px -2px 6px rgba(255, 255, 255, 0.03) !important;
+}
+
+/* 9b. Absensi Table & Card Dark Mode Overrides */
+.dark table thead tr {
+  background-color: #070b10 !important;
+}
+.dark table tbody tr {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+.dark table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+}
+.dark table td {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  color: #cbd5e1 !important;
+}
+.dark table td .text-slate-900 {
+  color: #ffffff !important;
+}
+.dark table td .text-slate-500,
+.dark table td .text-slate-600 {
+  color: #94a3b8 !important;
+}
+
+/* 10. Inset Elements & Icon Wells */
+.dark .neu-inset,
+.dark [class*="neu-inset"] {
+  background: #05080c !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 
+    inset 3px 3px 8px rgba(0, 0, 0, 0.85),
+    inset -2px -2px 6px rgba(255, 255, 255, 0.03) !important;
+  color: #2dd4bf !important;
+}
+
+.dark .neu-inset svg {
+  color: #2dd4bf !important;
+}
+
+/* 11. Badges & Status Pills */
+.dark .neu-pill-elevated {
+  background: linear-gradient(145deg, #16202c, #0d141e) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #f1f5f9 !important;
+}
+
+/* 12. Border Dividers across Pages */
+.dark .divide-slate-200,
+.dark .divide-slate-100,
+.dark .divide-stone-200,
+.dark .divide-stone-100,
+.dark [class*="divide-black"] {
+  border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* 13. Skeleton Loaders in Dark Mode */
+.dark [data-slot="skeleton"],
+.dark .animate-pulse {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+
+

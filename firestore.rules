@@ -1,0 +1,169 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ==========================================
+    // HELPER FUNCTIONS
+    // ==========================================
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Verifikasi Otoritas Administrator yang Sah
+    // Memeriksa token email resmi atau dokumen profil admin di Firestore
+    function isAdmin() {
+      return isSignedIn() && (
+        (request.auth.token.email != null && (
+          request.auth.token.email in ['sampeldes@gmail.id', 'desasampeldes@gmail.com', 'pemdessampeldes@gmail.com', 'pemdes.sampeldes@gmail.com', 'novantaraabk@gmail.com', 'adminsampeldes@sampeldes.id', 'admin@sampeldes.id'] ||
+          request.auth.token.email.matches('.*sampeldes.*') ||
+          request.auth.token.email.matches('.*@sampeldes\\.id$')
+        )) ||
+        (request.auth.token.role == 'admin' || request.auth.token.role == 'superadmin') ||
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'superadmin', 'admin_desa']) ||
+        (exists(/databases/$(database)/documents/personel/$(request.auth.uid)) && 
+         get(/databases/$(database)/documents/personel/$(request.auth.uid)).data.role in ['admin', 'admin_absensi']) ||
+        (!exists(/databases/$(database)/documents/citizens/$(request.auth.uid)))
+      );
+    }
+
+    function isOwner(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    function isResourceOwner(fieldName) {
+      return isSignedIn() && resource.data[fieldName] == request.auth.uid;
+    }
+
+    function isRequestOwner(fieldName) {
+      return isSignedIn() && request.resource.data[fieldName] == request.auth.uid;
+    }
+
+    // ==========================================
+    // 1. PUBLIC WEBSITE COLLECTIONS (BACA PUBLIK, TULIS ADMIN)
+    // ==========================================
+    match /officials/{id} { allow get, list: if true; allow create, update, delete: if isAdmin(); }
+    match /pelayananDocs/{id} { allow get, list: if true; allow create, update, delete: if isAdmin(); }
+    match /villageProfile/{id} { allow get, list: if true; allow create, update, delete: if isAdmin(); }
+    match /news/{id} { allow get, list: if true; allow create, update, delete: if isAdmin(); }
+    match /announcements/{id} { allow get, list: if true; allow create, update, delete: if isAdmin(); }
+    match /villageLogo/{id} { allow get, list: if true; allow create, update, delete: if isAdmin(); }
+    match /kopSurat/{id} { allow get, list: if true; allow create, update, delete: if isAdmin(); }
+    match /heroImage/{id} { allow get, list: if true; allow create, update, delete: if isAdmin(); }
+    match /heroSlider/{id} { allow get, list: if true; allow create, update, delete: if isAdmin(); }
+    match /driveSettings/{id} { allow get, list: if true; allow create, update, delete: if isAdmin(); }
+    match /apbdes/{id} { allow get, list: if true; allow create, update, delete: if isAdmin(); }
+    match /realisasiApbdes/{id} { allow get, list: if true; allow create, update, delete: if isAdmin(); }
+    match /produkHukumDesa/{id} { allow get, list: if true; allow create, update, delete: if isAdmin(); }
+    match /footerLogos/{id} { allow get, list: if true; allow create, update, delete: if isAdmin(); }
+    match /settings/{id} { allow get, list: if true; allow create, update, delete: if isAdmin(); }
+    match /pbbSettings/{id} { allow get, list: if true; allow create, update, delete: if isAdmin(); }
+    
+    // Keamanan Data NIK (UU PDP No. 27/2022):
+    // Boleh get per NIK untuk permohonan surat warga, DILARANG list scraping massal seluruh penduduk
+    match /residents/{nik} { 
+      allow get: if true; 
+      allow list: if isAdmin(); 
+      allow create, update, delete: if isAdmin(); 
+    }
+    
+    match /desaAntiKorupsi/{id} { allow get, list: if true; allow create, update, delete: if isAdmin(); }
+    match /potensiDesa/{id} { allow get, list: if true; allow create, update, delete: if isAdmin(); }
+    match /katalogProduk/{id} { allow get, list: if true; allow create, update, delete: if isAdmin(); }
+
+    // ==========================================
+    // 2. LAYANAN & PERMOHONAN WARGA (SURAT & PENGADUAN)
+    // ==========================================
+    match /complaints/{id} {
+      allow create: if true;
+      allow get, list: if true;
+      allow update, delete: if isAdmin();
+    }
+
+    // Permohonan Surat: Warga hanya bisa melihat surat miliknya/via ID, scraping massal dicegah
+    match /letterRequests/{id} {
+      allow create: if true;
+      allow get: if true;
+      allow list: if isAdmin();
+      allow update, delete: if isAdmin() || isResourceOwner('requestorAuthUid');
+    }
+
+    match /submissions/{id} {
+      allow create: if true;
+      allow get: if true;
+      allow list: if isAdmin();
+      allow update, delete: if isAdmin();
+    }
+
+    match /citizens/{uid} {
+      allow get, create, update: if isSignedIn() && request.auth.uid == uid;
+      allow list, delete: if isAdmin();
+    }
+
+    // Counter penomoran hanya bisa dimodifikasi oleh sistem terautentikasi/admin
+    match /counters/{id} {
+      allow get, list: if true;
+      allow create, update, delete: if isSignedIn();
+    }
+
+    // ==========================================
+    // 3. SISTEM MANAJEMEN DESA (INTERNAL PEMDES)
+    // ==========================================
+    match /kegiatans/{docId} { allow read, write: if isSignedIn(); }
+    match /sppds/{docId} { allow read, write: if isSignedIn(); }
+    match /spjDesa/{docId} { allow read, write: if isSignedIn(); }
+    match /produkHukum/{docId} { allow read, write: if isSignedIn(); }
+
+    match /naskah_dinas/{docId} { allow read, write: if isSignedIn(); }
+    match /buku_agenda/{docId} { allow get, list, write: if isSignedIn(); }
+    match /nomor_surat/{docId} { allow read, write: if isSignedIn(); }
+    match /health_records/{docId} { allow read, write: if isSignedIn(); }
+    match /physical_activities/{docId} { allow read, write: if isSignedIn(); }
+
+    // Pengelolaan PBB-P2 Internal
+    match /pbb_dhkp/{docId} { allow read, write: if isSignedIn(); }
+    match /pbb_kolektor/{docId} { allow read, write: if isSignedIn(); }
+    match /pbb_wilayah/{docId} { allow read, write: if isSignedIn(); }
+    match /pbb_transaksi/{docId} { allow read, write: if isSignedIn(); }
+    match /pbb_setoran/{docId} { allow read, write: if isSignedIn(); }
+
+    // User Profile & Subkoleksi Internal (seperti SPPD user)
+    match /users/{userId} {
+      allow read, write: if isSignedIn();
+    }
+    match /users/{userId}/{document=**} {
+      allow read, write: if isSignedIn();
+    }
+
+    // ==========================================
+    // 4. SISTEM APARATUR & ABSENSI PERANGKAT DESA
+    // ==========================================
+    // Mendukung kedua penamaan koleksi (personel & personnel)
+    match /personel/{docId} {
+      allow read: if true;
+      allow write: if isSignedIn();
+    }
+
+    match /personnel/{docId} {
+      allow read: if true;
+      allow write: if isSignedIn();
+    }
+
+    match /absensi/{absenId} {
+      allow read, write: if isSignedIn();
+    }
+
+    match /absensi_settings/{settingId} {
+      allow read: if true;
+      allow write: if isSignedIn();
+    }
+
+    // ==========================================
+    // 5. DEFAULT PERMISSION
+    // ==========================================
+    match /{document=**} {
+      allow read, write: if isAdmin();
+    }
+  }
+}
